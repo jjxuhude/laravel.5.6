@@ -11,8 +11,15 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+//前台
+Route::group(['namespace'=>'Frontend'],function (){
+    Route::get('/', function () {
+        return view('frontend.welcome');
+    });
+    Route::get('/home', 'HomeController@index')->name('home');
+    
+    Auth::routes();
+        
 });
 
 //后台
@@ -21,6 +28,5 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin'],function (){
 });
 
 
-Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+
