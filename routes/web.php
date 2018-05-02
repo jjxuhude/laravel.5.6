@@ -25,6 +25,7 @@ Route::group(['namespace'=>'Frontend'],function (){
 //后台
 Route::group(['prefix'=>'admin','namespace'=>'Admin'],function (){
     Route::get('/','Home\IndexController@index');
+    Auth::routes();
 });
 
 

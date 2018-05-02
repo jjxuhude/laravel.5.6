@@ -23,6 +23,7 @@ class HomeController extends Controller
      */
     public function index()
     {
+        dump(session()->all());
         return view('frontend.home');
     }
 }

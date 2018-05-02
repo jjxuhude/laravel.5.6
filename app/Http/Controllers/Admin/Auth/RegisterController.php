@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\Frontend\Auth;
+namespace App\Http\Controllers\Admin\Auth;
 
-use App\Model\User;
-use App\Http\Controllers\Frontend\Controller;
+use App\Model\AdminUser;
+use App\Http\Controllers\Admin\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Support\Facades\Auth;
 
 class RegisterController extends Controller
 {
@@ -28,7 +29,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/admin';
 
     /**
      * Create a new controller instance.
@@ -37,7 +38,7 @@ class RegisterController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest');
+        $this->middleware('guest:backend');
     }
 
     /**
@@ -59,11 +60,11 @@ class RegisterController extends Controller
      * Create a new user instance after a valid registration.
      *
      * @param  array  $data
-     * @return \App\Model\User
+     * @return \App\Model\AdminUser
      */
     protected function create(array $data)
     {
-        return User::create([
+        return AdminUser::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
@@ -72,6 +73,10 @@ class RegisterController extends Controller
     
     public function showRegistrationForm()
     {
-        return view('frontend.auth.register');
+        return view('admin.auth.register');
+    }
+    
+    public function guard(){
+        return Auth::guard('backend');
     }
 }
