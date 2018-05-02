@@ -25,11 +25,19 @@ Route::group(['namespace'=>'Frontend'],function (){
  
 });
 
-//后台
+
 Route::group(['prefix'=>'admin','namespace'=>'Admin'],function (){
     Route::get('/','Home\IndexController@index');
-    Auth::routes();
+    
+    Route::get('login', 'Auth\LoginController@showLoginForm');
+    Route::post('login', 'Auth\LoginController@login');
+    Route::post('logout', 'Auth\LoginController@logout');
+    Route::get('register', 'Auth\RegisterController@showRegistrationForm');
+    Route::post('register', 'Auth\RegisterController@register');
+    
 });
+
+
 
 
 function setControllerRoute($controller){
@@ -71,6 +79,9 @@ function setControllerRoute($controller){
     }
 }
 
+//后台
+
+
 function getDocParam($string,$name){
     if(empty($string)) return '';
     preg_match('/@'.$name.'(.*)/', $string,$match);
@@ -80,6 +91,7 @@ function getDocParam($string,$name){
         return '';
     }
 }
+
 
 
 
