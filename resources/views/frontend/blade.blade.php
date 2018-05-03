@@ -15,7 +15,7 @@
 			<td><a href="<?php echo url('/'.strtolower(strstr(basename(strstr(request()->route()->getAction('controller'),'@',true)),'Controller',true)).'/'.$method->name)?>"><?php echo  $method->desc?></a></td>
 			<td>
 				<?php if(isset($method->doc['param'])): foreach($method->doc['param'] as $k=>$v):?>
-					<li> <?php echo $v?></li>
+					<li> @param <?php echo $v?></li>
 				<?php endforeach;endif;?>
 			</td>
 		</tr>

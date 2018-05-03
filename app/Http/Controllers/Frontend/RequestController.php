@@ -3,6 +3,7 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Frontend\Controller;
 use App\Services\DocParser;
+use Illuminate\Support\Facades\App;
 
 class RequestController extends Controller
 {
@@ -49,7 +50,7 @@ class RequestController extends Controller
 
    /**
     * @desc doc
-    * @param int $aaa
+    * @param Illuminate\Support\Facades\App $aaa
     * @param int $bbb
     */
    function doc($aaa=0,$bbb=1){

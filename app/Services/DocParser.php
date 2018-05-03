@@ -111,7 +111,7 @@ class DocParser {
         $pos = strpos ( $string, ' ' );
         
         $type = substr ( $string, 0, $pos );
-        return '(' . $type . ')' . substr ( $string, $pos + 1 );
+        return '【 ' . $type . ' 】 ' . substr ( $string, $pos + 1 );
     }
 }  
 
