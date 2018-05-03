@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Frontend\BladeController;
+use App\Http\Controllers\Frontend\RequestController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,7 +23,8 @@ Route::group(['namespace'=>'Frontend'],function (){
     Auth::routes();
     
     $routeConfig=resolve('routeConfig');
-    $methods=$routeConfig->setController(BladeController::class);;
+    $routeConfig->setController(BladeController::class);
+    $routeConfig->setController(RequestController::class);
  
 });
 

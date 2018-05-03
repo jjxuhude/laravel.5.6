@@ -20,7 +20,7 @@ class RouteConfig
                 \Route::get('/'.$route,'\\'.$method->class."@".$method->name);
             }
             
-            switch ($this->getDocParam($method->getDocComment(), 'method')) {
+            switch ($this->getDocParam($method, 'method')) {
                 case 'post':
                     \Route::post('/'.$route.'/'.$method->name,'\\'.$method->class."@".$method->name);
                     break;
@@ -45,14 +45,26 @@ class RouteConfig
         }
     }
     
-    function getDocParam($string,$name){
+    function getDocParam($method,$name){
+        $string=$method->getDocComment();
         if(empty($string)) return '';
         preg_match('/@'.$name.'(.*)/', $string,$match);
         if(isset($match[1])){
             return trim($match[1]);
         }else{
-            return '';
+            return $method->name;
         }
     }
+    
+    function getDocParamByControllerString($string,$name){
+        $data=explode('@',$string);
+        if(count($data)==2){
+            $method=new \ReflectionMethod($data[0],$data[1]);
+           return $this->getDocParam($method->getDocComment(), $name);
+        }
+        return '';
+        
+    }
+
 }
 
