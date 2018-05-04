@@ -9,10 +9,11 @@
 			<th>接口描述</th>
 			<th>参数</th>
 		</tr>
+		
 		<?php foreach($methods as $method):?>
 		<tr>
 			<td><?php echo  $method->name?></td>
-			<td><a href="<?php echo url('/'.strtolower(strstr(basename(strstr(request()->route()->getAction('controller'),'@',true)),'Controller',true)).'/'.$method->name)?>"><?php echo  $method->desc?></a></td>
+			<td><a href="<?php echo url('/'.strtolower(strstr(basename(strstr(str_replace('\\', DIRECTORY_SEPARATOR, request()->route()->getAction('controller')),'@',true)),'Controller',true)).'/'.$method->name)?>"><?php echo  $method->desc?></a></td>
 			<td>
 				<?php if(isset($method->doc['param'])): foreach($method->doc['param'] as $k=>$v):?>
 					<li> @param <?php echo $v?></li>
