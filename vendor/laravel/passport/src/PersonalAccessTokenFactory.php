@@ -67,11 +67,11 @@ class PersonalAccessTokenFactory
      */
     public function make($userId, $name, array $scopes = [])
     {
+        dump(333);exit;
         $response = $this->dispatchRequestToAuthorizationServer(
             $this->createRequest($this->clients->personalAccessClient(), $userId, $scopes)
         );
 
-        dump($response);exit;
         
         $token = tap($this->findAccessToken($response), function ($token) use ($userId, $name) {
             $this->tokens->save($token->forceFill([
