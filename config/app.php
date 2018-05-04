@@ -159,6 +159,15 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        
+        Laravel\Passport\PassportServiceProvider::class,
+        /**
+         *  Client ID: 1
+            Client Secret: VhA04JDvdY4dOhdn8g1xJKP7bh8oUxRX10cZANhh
+            Password grant client created successfully.
+            Client ID: 2
+            Client Secret: 68Z8L9bO6oauU4eYe9uX2m6DbChv13cITfWkztWp
+         */
 
     ],
 
