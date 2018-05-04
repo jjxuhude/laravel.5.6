@@ -67,7 +67,7 @@ class RouteConfig
         $data = explode('@', $string);
         if (count($data) == 2) {
             $method = new \ReflectionMethod($data[0], $data[1]);
-            return $this->getDocParam($method->getDocComment(), $name);
+            return $this->getDocParam($method, $name);
         }
         return '';
     }
