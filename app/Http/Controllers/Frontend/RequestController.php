@@ -62,5 +62,12 @@ class RequestController extends Controller
     {
         dump(resolve('docParser')->parse(new \ReflectionMethod($this, 'doc')));
     }
+    
+    /**
+     * @desc phpinfo
+     */
+    function p(){
+        phpinfo();
+    }
 }
 
