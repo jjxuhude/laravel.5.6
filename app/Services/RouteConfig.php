@@ -18,7 +18,8 @@ class RouteConfig
         foreach ($methods as $method) {
             $route = strtolower(strstr(basename($method->class), 'Controller', true));
             
-            dump(basename($method->class));
+            
+            dump(basename($method->class)." " .__NAMESPACE__);
             if ($method->name == 'index') {
                 \Route::get('/' . $route, '\\' . $method->class . "@" . $method->name);
             }
