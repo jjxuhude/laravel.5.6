@@ -18,7 +18,7 @@ class RouteConfig
         foreach ($methods as $method) {
             $route = strtolower(strstr(basename($method->class), 'Controller', true));
             
-            preg_match('/[\\\](.+?)$/g', $method->class,$match);
+            preg_match_all('/[\\\](.+?)$/g', $method->class,$match);
             dump($match);
             
             if ($method->name == 'index') {
