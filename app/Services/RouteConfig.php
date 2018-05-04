@@ -14,7 +14,7 @@ class RouteConfig
             }
         });
         
-        dump($methods);exit;
+        //dump($methods);exit;
         foreach ($methods as $method) {
             $route = strtolower(strstr(basename($method->class), 'Controller', true));
             if ($method->name == 'index') {
