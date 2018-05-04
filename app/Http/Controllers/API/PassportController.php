@@ -4,7 +4,6 @@ namespace App\Http\Controllers\API;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Validator;
-use App\Model\User;
 
 class PassportController extends Controller
 {
@@ -48,8 +47,10 @@ class PassportController extends Controller
         $input = $request->all();
         $input['password'] = bcrypt($input['password']);
         $user = User::create($input);
-        return response()->json(['success'=>'successs'], $this->successStatus);
-      
+        $success['token'] =  $user->createToken('MyApp')->accessToken;
+        $success['name'] =  $user->name;
+        
+        return response()->json(['success'=>$success], $this->successStatus);
     }
     
     /**
