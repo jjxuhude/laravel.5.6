@@ -67,7 +67,7 @@ class PersonalAccessTokenFactory
      */
     public function make($userId, $name, array $scopes = [])
     {
-        dump(333);exit;
+        echo 111;exit;
         $response = $this->dispatchRequestToAuthorizationServer(
             $this->createRequest($this->clients->personalAccessClient(), $userId, $scopes)
         );
