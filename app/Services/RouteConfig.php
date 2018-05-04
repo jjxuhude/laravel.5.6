@@ -17,8 +17,8 @@ class RouteConfig
         //dump($methods);exit;
         foreach ($methods as $method) {
             $route = strtolower(strstr(basename($method->class), 'Controller', true));
-            preg_match('/(.+)Controller$/', $method->class,$match);
-            dump($match);
+            
+            dump(basename($method->class));
             if ($method->name == 'index') {
                 \Route::get('/' . $route, '\\' . $method->class . "@" . $method->name);
             }
