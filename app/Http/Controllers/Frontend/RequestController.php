@@ -10,7 +10,7 @@ class RequestController extends Controller
 
     /**
      * 首页
-     * 
+     *
      * @return \Illuminate\View\View|\Illuminate\Contracts\View\Factory
      */
     function index()
@@ -20,7 +20,7 @@ class RequestController extends Controller
 
     /**
      * path
-     * 
+     *
      * @return \Illuminate\View\View|\Illuminate\Contracts\View\Factory
      */
     function path()
@@ -54,7 +54,7 @@ class RequestController extends Controller
 
     /**
      * doc
-     * 
+     *
      * @param Illuminate\Support\Facades\App $aaa            
      * @param int $bbb            
      */
@@ -62,11 +62,12 @@ class RequestController extends Controller
     {
         dump(resolve('docParser')->parse(new \ReflectionMethod($this, 'doc')));
     }
-    
+
     /**
-     * @desc phpinfo
+     * phpinfo
      */
-    function p(){
+    function p()
+    {
         phpinfo();
     }
 }

@@ -14,13 +14,13 @@ class RouteConfig
             }
         });
         
-        //dump($methods);exit;
+        // dump($methods);exit;
         foreach ($methods as $method) {
             
             $route = strtolower(strstr(basename(str_replace('\\', DIRECTORY_SEPARATOR, $method->class)), 'Controller', true));
             
-            //preg_match('/[\\\](\w+)Controller$/U', $method->class,$match);
-            //if(isset($match[1])) $route=$match[1];
+            // preg_match('/[\\\](\w+)Controller$/U', $method->class,$match);
+            // if(isset($match[1])) $route=$match[1];
             if ($method->name == 'index') {
                 \Route::get('/' . $route, '\\' . $method->class . "@" . $method->name);
             }
