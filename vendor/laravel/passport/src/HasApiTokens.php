@@ -63,6 +63,8 @@ trait HasApiTokens
      */
     public function createToken($name, array $scopes = [])
     {
+        echo get_class(Container::getInstance()->make(PersonalAccessTokenFactory::class));
+        exit;
         return Container::getInstance()->make(PersonalAccessTokenFactory::class)->make(
             $this->getKey(), $name, $scopes
         );
