@@ -71,12 +71,15 @@ class PersonalAccessTokenFactory
             $this->createRequest($this->clients->personalAccessClient(), $userId, $scopes)
         );
 
+        
         $token = tap($this->findAccessToken($response), function ($token) use ($userId, $name) {
             $this->tokens->save($token->forceFill([
                 'user_id' => $userId,
                 'name' => $name,
             ]));
         });
+        
+        dump($token);exit;
 
         return new PersonalAccessTokenResult(
             $response['access_token'], $token
