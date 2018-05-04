@@ -5,22 +5,27 @@ use App\Http\Controllers\Frontend\Controller;
 
 class BladeController extends Controller
 {
-   
-   /**
-    * @desc blade模板测试
-    * @return \Illuminate\View\View|\Illuminate\Contracts\View\Factory
-    */ 
-    function index(){
-       return parent::index();
+
+    /**
+     * blade模板测试
+     * 
+     * @return \Illuminate\View\View|\Illuminate\Contracts\View\Factory
+     */
+    function index()
+    {
+        return parent::index();
     }
-   
-   
-   /**
-    * @desc solt演示
-    * @return \Illuminate\View\View|\Illuminate\Contracts\View\Factory
-    */
-   function solt(){
-       return view('frontend.blade.solt',['title'=>'solt演示']);
-   }
+
+    /**
+     * solt演示
+     * 
+     * @return \Illuminate\View\View|\Illuminate\Contracts\View\Factory
+     */
+    function solt()
+    {
+        return view('frontend.blade.solt', [
+            'title' => 'solt演示'
+        ]);
+    }
 }
 
