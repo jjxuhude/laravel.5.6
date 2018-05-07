@@ -38,6 +38,7 @@ class PassportController extends Controller
     
     /**
      * @desc Register api
+     * @param string name
      * @param string password
      * @param string c_password
      * @return \Illuminate\Http\Response
