@@ -110,10 +110,6 @@ class PersonalAccessTokenFactory
      */
     protected function dispatchRequestToAuthorizationServer(ServerRequest $request)
     {
-        echo $this->server->respondToAccessTokenRequest(
-            $request, new Response
-            )->getBody()->__toString();
-        exit;
         return json_decode($this->server->respondToAccessTokenRequest(
             $request, new Response
         )->getBody()->__toString(), true);
