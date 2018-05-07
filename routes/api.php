@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 |
 */
 
+Route::get('index', 'API\PassportController@index');
 Route::post('login', 'API\PassportController@login');
 Route::post('register', 'API\PassportController@register');
 

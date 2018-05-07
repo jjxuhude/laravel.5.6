@@ -10,9 +10,14 @@ class PassportController extends Controller
     
     public $successStatus = 200;
     
+    public function index(){
+        return parent::index();
+    }
+    
     /**
-     * login api
-     *
+     * @desc login api
+     * @param email
+     * @param password
      * @return \Illuminate\Http\Response
      */
     public function login(){
@@ -27,8 +32,11 @@ class PassportController extends Controller
     }
     
     /**
-     * Register api
-     *
+     * @desc Register api
+     * @param name
+     * @param email
+     * @param password
+     * @param c_password
      * @return \Illuminate\Http\Response
      */
     public function register(Request $request)
