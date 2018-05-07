@@ -71,6 +71,7 @@ class PersonalAccessTokenFactory
             $this->createRequest($this->clients->personalAccessClient(), $userId, $scopes)
         );
 
+        echo $response['access_token'];
         $token = tap($this->findAccessToken($response), function ($token) use ($userId, $name) {
             $this->tokens->save($token->forceFill([
                 'user_id' => $userId,
