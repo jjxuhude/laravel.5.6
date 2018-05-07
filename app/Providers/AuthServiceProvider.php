@@ -29,7 +29,7 @@ class AuthServiceProvider extends ServiceProvider
 
         //
         Passport::routes();
-        Passport::tokensExpireIn(new \DateInterval('P1M'));
-        Passport::refreshTokensExpireIn(new \DateInterval('P1M'));
+        Passport::tokensExpireIn((new \DateTime())->add(new \DateInterval('P1M')));
+        Passport::refreshTokensExpireIn((new \DateTime())->add(new \DateInterval('P1M')));
     }
 }
