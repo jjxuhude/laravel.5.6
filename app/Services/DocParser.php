@@ -32,9 +32,19 @@ class DocParser
         if (preg_match_all('#^\s*\*(.*)#m', $comment, $lines) === false)
             return $this->params;
         $this->parseLines($lines[1]);
+        if(isset($this->params['param']) && !is_array($this->params['param'])){
+            $this->params['param']=[$this->params['param']];
+        }
+        if(isset($this->params['param']) && is_array($this->params['param'])){
+            $this->params['param']=$this->arr_foreach($this->params['param']);
+        }
         return $this->params;
     }
 
+    function arr_foreach($array,$return=[]){
+        array_walk_recursive($array,function($value)use(&$return){$return[]=$value;});
+        return $return;
+    }
     private function parseLines($lines)
     {
         foreach ($lines as $line) {
@@ -94,7 +104,7 @@ class DocParser
                 $this->params[$param],
                 $value
             );
-            $this->params[$param] = $value;
+            $this->params[$param] = $arr;
         } else {
             $this->params[$param] = $value + $this->params[$param];
         }
