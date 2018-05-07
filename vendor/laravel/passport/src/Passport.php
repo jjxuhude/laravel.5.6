@@ -247,7 +247,7 @@ class Passport
         if (is_null($date)) {
             return static::$refreshTokensExpireAt
                             ? Carbon::now()->diff(static::$refreshTokensExpireAt)
-                            : new DateInterval('P1Y');
+                            : new DateInterval('P1M');
         }
 
         static::$refreshTokensExpireAt = $date;
