@@ -73,7 +73,6 @@ class PassportController extends Controller
      */
      function getDetails()
     {
-         echo 111;exit;
         $user = Auth::user();
         return response()->json(['success' => $user], $this->successStatus);
     }
