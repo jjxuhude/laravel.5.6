@@ -10,6 +10,11 @@ class PassportController extends Controller
     
     public $successStatus = 200;
     
+    /**
+     * @desc api list
+     * {@inheritDoc}
+     * @see \App\Http\Controllers\API\Controller::index()
+     */
     public function index(){
         return parent::index();
     }
