@@ -62,11 +62,11 @@ class PassportController extends Controller
     }
     
     /**
-     * details api
+     * @desc details api
      *
      * @return \Illuminate\Http\Response
      */
-    public function getDetails()
+    protected function getDetails()
     {
         $user = Auth::user();
         return response()->json(['success' => $user], $this->successStatus);
