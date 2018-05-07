@@ -10,8 +10,11 @@ class PassportController extends Controller
     
     public $successStatus = 200;
     
+    protected $routePrefix='api';
+    
     /**
      * @desc api list
+     * @method get
      * {@inheritDoc}
      * @see \App\Http\Controllers\API\Controller::index()
      */
@@ -21,6 +24,7 @@ class PassportController extends Controller
     
     /**
      * @desc login api
+     * @method post
      * @param string email
      * @param string password
      * @return \Illuminate\Http\Response
@@ -38,6 +42,7 @@ class PassportController extends Controller
     
     /**
      * @desc Register api
+     * @method post
      * @param string name
      * @param string email
      * @param string password
