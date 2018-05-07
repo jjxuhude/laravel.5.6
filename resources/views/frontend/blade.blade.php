@@ -6,6 +6,7 @@
 			<tr>
 				<th>接口名称</th>
 				<th>接口描述</th>
+				<th>METHOD</th>
 				<th>参数</th>
 			</tr>
 		
@@ -13,7 +14,9 @@
 		<tr>
 				<td><?php echo  $method->name?></td>
 				<td><a
-					href="<?php echo url('/'.strtolower(strstr(basename(strstr(str_replace('\\', DIRECTORY_SEPARATOR, request()->route()->getAction('controller')),'@',true)),'Controller',true)).'/'.$method->name)?>"><?php echo  $method->desc?></a></td>
+					href="<?php echo url('/'.$method->router.'/'.$method->name)?>"><?php echo  $method->desc?></a>
+				</td>
+				<td><?php echo strtoupper($method->doc['method']??'')?></td>
 				<td>
 				<?php if(isset($method->doc['param'])): foreach($method->doc['param'] as $k=>$v):?>
 					<li> @param <?php echo $v?></li>
