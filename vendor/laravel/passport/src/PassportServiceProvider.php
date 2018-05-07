@@ -109,7 +109,7 @@ class PassportServiceProvider extends ServiceProvider
                 );
 
                 $server->enableGrantType(
-                    new PersonalAccessGrant, new DateInterval('P1Y')
+                    new PersonalAccessGrant, new DateInterval('P1M')
                 );
 
                 $server->enableGrantType(
