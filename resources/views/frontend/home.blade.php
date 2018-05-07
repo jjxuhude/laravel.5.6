@@ -13,7 +13,7 @@
                             {{ session('status') }}
                         </div>
                     @endif
-					<?php dump(request()->user());?>
+					<?php dump(request()->user()->all());?>
                     You are logged in!
                 </div>
             </div>
