@@ -228,7 +228,7 @@ class Passport
         if (is_null($date)) {
             return static::$tokensExpireAt
                             ? Carbon::now()->diff(static::$tokensExpireAt)
-                            : new DateInterval('P1Y');
+                            : new DateInterval('P1M');
         }
 
         static::$tokensExpireAt = $date;
