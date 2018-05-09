@@ -20,7 +20,7 @@ Route::get('getDetails', 'API\PassportController@getDetails');
 
 Route::get('/redirect', function (){
     $query = http_build_query([
-        'client_id' => '5',
+        'client_id' => '6',
         'redirect_uri' =>  url('auth/callback'),
         'response_type' => 'code',
         'scope' => '',
