@@ -21,8 +21,8 @@ Route::get('/auth/callback', function (\Illuminate\Http\Request $request){
         $response = $http->post(url('oauth/token'), [
             'form_params' => [
                 'grant_type' => 'authorization_code',
-                'client_id' => '6',  // your client id
-                'client_secret' => 'kAyQpjbrV2OMtlcQSUO593tLebDavHfHcxzNTc2f',   // your client secret
+                'client_id' => '7',  // your client id
+                'client_secret' => 'J2bTdpPwxtmUN3LOqBKNhNE861bUnlA6YR5V4o1h',   // your client secret
                 'redirect_uri' => url('auth/callback'),
                 'code' => $request->code,
             ],
