@@ -18,6 +18,7 @@ Route::post('login', 'API\PassportController@login');
 Route::post('register', 'API\PassportController@register');
 Route::get('getDetails', 'API\PassportController@getDetails');
 
+//客户端代码
 Route::get('/redirect', function (){
     $query = http_build_query([
         'client_id' => '8',

@@ -14,6 +14,7 @@ use App\Http\Controllers\Frontend\RequestController;
  */
 
 
+//服务器验证代码
 Route::get('/auth/callback', function (\Illuminate\Http\Request $request){
     if ($request->get('code')) {
         $http = new GuzzleHttp\Client;
