@@ -23,7 +23,7 @@ Route::get('/auth/callback', function (\Illuminate\Http\Request $request){
                 'grant_type' => 'authorization_code',
                 'client_id' => '8',  // your client id
                 'client_secret' => 'sTde5bAURAdhw3FEthBTjq2llrs0iLR4uVvepg53',   // your client secret
-                'redirect_uri' => url('auth/callback'),
+                'redirect_uri' => 'http://la56.org/auth/callback',
                 'code' => $request->code,
             ],
         ]);
