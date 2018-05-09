@@ -13,8 +13,11 @@
                             {{ session('status') }}
                         </div>
                     @endif
-					<?php dump(request()->user()->toArray());?>
+					<?php //dump(request()->user()->toArray());?>
                     You are logged in!
+                    <div><passport-clients/></div>
+                    <div><passport-authorized-clients/></div>
+                    <div><passport-personal-access-tokens/></div>
                 </div>
             </div>
         </div>

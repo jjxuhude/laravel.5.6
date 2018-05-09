@@ -79,11 +79,8 @@
             @endif
 
             <div class="content">
-            	<div id="app">
-            		<passport-personal-access-tokens/>
-            	</div>
-            <script type="text/javascript" src="{{ asset('js/app.js') }}" ></script>
-            <link href="{{ asset('css/app.css') }}" rel="stylesheet" type="text/css">
+         
+
             
             </div>
         </div>

@@ -75,6 +75,7 @@
             @yield('content')
         </main>
     </div>
-    <script type="text/javascript" src="{{ asset('public/js/app.js') }}" ></script>
+    <script type="text/javascript" src="{{ asset('js/app.js') }}" ></script>
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet" type="text/css">
 </body>
 </html>
