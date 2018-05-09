@@ -17,6 +17,32 @@ use App\Http\Controllers\Frontend\RequestController;
 //服务器验证代码
 Route::get('/auth/callback', function (\Illuminate\Http\Request $request){
     
+    
+    //密码token
+    if($request->has('password')){
+        $http = new GuzzleHttp\Client;
+        
+        $response = $http->post(url('oauth/token'), [
+            'form_params' => [
+                'grant_type' => 'password',
+                'client_id' => '2',
+                'client_secret' => 'De2k1WGgpKKDSJvqIE6ftfDfQarIP4wuelifebEV',
+                'username' => 'api@163.com',
+                'password' => '111111',
+                'scope' => '',
+            ],
+        ]);
+        
+        $data=json_decode((string) $response->getBody(), true);
+        
+        $data['grant_type']='password';
+        
+        return $data;
+        
+    }
+    
+    
+    
     //刷新token
     if($request->has('refresh_token')){
         $http = new GuzzleHttp\Client;
