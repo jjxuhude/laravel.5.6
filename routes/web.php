@@ -15,7 +15,6 @@ use App\Http\Controllers\Frontend\RequestController;
 
 //客户端凭证授权令牌
 Route::get('/credentials', function(Request $request) {
-    echo 111;exit;
     $guzzle = new GuzzleHttp\Client;
     
     $response = $guzzle->post(url('oauth/token'), [
