@@ -31,5 +31,8 @@ class AuthServiceProvider extends ServiceProvider
         Passport::routes();
         Passport::tokensExpireIn((new \DateTime())->add(new \DateInterval('P1M')));
         Passport::refreshTokensExpireIn((new \DateTime())->add(new \DateInterval('P1M')));
+        
+        //隐式授权令牌
+        Passport::enableImplicitGrant();
     }
 }
