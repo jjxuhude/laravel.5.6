@@ -15,9 +15,9 @@
                     @endif
 					<?php //dump(request()->user()->toArray());?>
                     You are logged in!
-                    <div><passport-clients/></div>
-                    <div><passport-authorized-clients/></div>
-                    <div><passport-personal-access-tokens/></div>
+                    <div class="passport-clients"><passport-clients/></div>
+                    <div class="passport-authorized-clients"><passport-authorized-clients/></div>
+                    <div class="passport-personal-access-tokens"><passport-personal-access-tokens/></div>
                 </div>
             </div>
         </div>
