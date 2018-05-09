@@ -26,7 +26,7 @@ Route::get('/redirect', function (){
         'scope' => '',
     ]);
     
-    return redirect('http://laravel55.dev/oauth/authorize?' . $query);
+    return redirect(url('oauth/authorize').'?' . $query);
 });
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
