@@ -13,6 +13,21 @@ use App\Http\Controllers\Frontend\RequestController;
  * |
  */
 
+//客户端凭证授权令牌
+Route::get('/credentials', function(Request $request) {
+    $guzzle = new GuzzleHttp\Client;
+    
+    $response = $guzzle->post(url('oauth/token'), [
+        'form_params' => [
+            'grant_type' => 'client_credentials',
+            'client_id' => '1',
+            'client_secret' => 'ml3KXBt88wc6Lg5GEBBUVsMPTN1zHOO8E6u83Fnk',
+            'scope' => '',
+        ],
+    ]);
+    
+    return json_decode((string) $response->getBody(), true);
+})->middleware('client');
 
 //服务器验证代码
 Route::get('/auth/callback', function (\Illuminate\Http\Request $request){
