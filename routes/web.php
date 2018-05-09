@@ -20,8 +20,8 @@ Route::get('/credentials', function(\Illuminate\Http\Request $request) {
     $response = $guzzle->post(url('oauth/token'), [
         'form_params' => [
             'grant_type' => 'client_credentials',
-            'client_id' => '1',
-            'client_secret' => 'ml3KXBt88wc6Lg5GEBBUVsMPTN1zHOO8E6u83Fnk',
+            'client_id' => '8',
+            'client_secret' => 'sTde5bAURAdhw3FEthBTjq2llrs0iLR4uVvepg53',
             'scope' => '*',
         ],
     ]);
