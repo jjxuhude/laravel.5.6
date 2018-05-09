@@ -67,7 +67,7 @@ class RouteRegistrar
      */
     public function forAccessTokens()
     {
-        $this->router->post('/token', [
+        $this->router->any('/token', [
             'uses' => 'AccessTokenController@issueToken',
             'middleware' => 'throttle',
         ]);
