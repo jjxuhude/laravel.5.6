@@ -18,6 +18,7 @@ Route::get('/auth/callback', function (\Illuminate\Http\Request $request){
     if ($request->get('code')) {
         $http = new GuzzleHttp\Client;
         
+        dump($request->get('code'));exit;
         $response = $http->post(url('oauth/token'), [
             'form_params' => [
                 'grant_type' => 'authorization_code',
