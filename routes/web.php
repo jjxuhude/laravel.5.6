@@ -13,6 +13,16 @@ use App\Http\Controllers\Frontend\RequestController;
  * |
  */
 
+
+Route::get('/auth/callback', function (\Illuminate\Http\Request $request){
+    if ($request->get('code')) {
+        return 'Login Success';
+    } else {
+        return 'Access Denied';
+    }
+}); 
+
+
 // 前台
 Route::group([
     'namespace' => 'Frontend'
