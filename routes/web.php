@@ -23,12 +23,12 @@ Route::get('/credentials', function(Request $request) {
             'grant_type' => 'client_credentials',
             'client_id' => '1',
             'client_secret' => 'ml3KXBt88wc6Lg5GEBBUVsMPTN1zHOO8E6u83Fnk',
-            'scope' => '',
+            'scope' => '*',
         ],
     ]);
     
     return json_decode((string) $response->getBody(), true);
-})->middleware('client');
+});
 
 //服务器验证代码
 Route::get('/auth/callback', function (\Illuminate\Http\Request $request){
