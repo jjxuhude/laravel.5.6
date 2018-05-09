@@ -16,7 +16,19 @@ use App\Http\Controllers\Frontend\RequestController;
 
 Route::get('/auth/callback', function (\Illuminate\Http\Request $request){
     if ($request->get('code')) {
-        return 'Login Success';
+        $http = new GuzzleHttp\Client;
+        
+        $response = $http->post(url('oauth/token'), [
+            'form_params' => [
+                'grant_type' => 'authorization_code',
+                'client_id' => '6',  // your client id
+                'client_secret' => 'kAyQpjbrV2OMtlcQSUO593tLebDavHfHcxzNTc2f',   // your client secret
+                'redirect_uri' => 'http://blog.test/auth/callback',
+                'code' => $request->code,
+            ],
+        ]);
+        
+        return json_decode((string) $response->getBody(), true);
     } else {
         return 'Access Denied';
     }
