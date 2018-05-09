@@ -29,6 +29,7 @@ class Kernel extends HttpKernel
      */
     protected $middlewareGroups = [
         'web' => [
+//             \Laravel\Passport\Http\Middleware\CreateFreshApiToken::class,
             \App\Http\Middleware\EncryptCookies::class,
             \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
             \Illuminate\Session\Middleware\StartSession::class,
@@ -53,6 +54,8 @@ class Kernel extends HttpKernel
      */
     protected $routeMiddleware = [
         'client' => CheckClientCredentials::class,
+        //'scopes' => \Laravel\Passport\Http\Middleware\CheckScopes::class,
+        //'scope' => \Laravel\Passport\Http\Middleware\CheckForAnyScope::class,
         'auth' => \Illuminate\Auth\Middleware\Authenticate::class,
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
         'bindings' => \Illuminate\Routing\Middleware\SubstituteBindings::class,
