@@ -21,7 +21,7 @@ Route::get('getDetails', 'API\PassportController@getDetails');
 Route::get('/redirect', function (){
     $query = http_build_query([
         'client_id' => '8',
-        'redirect_uri' =>  'http://www.hao123.com/',
+        'redirect_uri' =>  'http://la56.org/auth/callback',
         'response_type' => 'code',
         'scope' => '',
     ]);
