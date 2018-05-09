@@ -23,7 +23,7 @@ Route::get('/auth/callback', function (\Illuminate\Http\Request $request){
                 'grant_type' => 'authorization_code',
                 'client_id' => '6',  // your client id
                 'client_secret' => 'kAyQpjbrV2OMtlcQSUO593tLebDavHfHcxzNTc2f',   // your client secret
-                'redirect_uri' => 'http://blog.test/auth/callback',
+                'redirect_uri' => url('auth/callback'),
                 'code' => $request->code,
             ],
         ]);
