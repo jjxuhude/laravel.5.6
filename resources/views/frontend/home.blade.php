@@ -15,6 +15,7 @@
                     @endif
 					<?php //dump(request()->user()->toArray());?>
                     You are logged in!
+                    <?php echo url('auth/callback')?>
                     <div class="passport-clients"><passport-clients/></div>
                     <div class="passport-authorized-clients"><passport-authorized-clients/></div>
                     <div class="passport-personal-access-tokens"><passport-personal-access-tokens/></div>
