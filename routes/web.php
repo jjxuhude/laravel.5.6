@@ -28,7 +28,7 @@ Route::get('/credentials', function(\Illuminate\Http\Request $request) {
     
     return json_decode((string) $response->getBody(), true);
     
-})->middleware('client');
+});
 
 //服务器验证代码
 Route::get('/auth/callback', function (\Illuminate\Http\Request $request){
