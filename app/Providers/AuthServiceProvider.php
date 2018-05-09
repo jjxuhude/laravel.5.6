@@ -35,9 +35,9 @@ class AuthServiceProvider extends ServiceProvider
         //隐式授权令牌
         Passport::enableImplicitGrant();
         
-        Passport::tokensCan([
-            'place-orders' => 'Place orders',
-            'check-status' => 'Check order status',
-        ]);
+//         Passport::tokensCan([
+//             'place-orders' => 'Place orders',
+//             'check-status' => 'Check order status',
+//         ]);
     }
 }
