@@ -27,7 +27,7 @@ class HomeController extends Controller
         //dump(session()->all());
         $user=Auth::user();
         event(new Home($user));
-        dump($user->toArray());
+       // dump($user->toArray());
         return view('frontend.home');
     }
     
