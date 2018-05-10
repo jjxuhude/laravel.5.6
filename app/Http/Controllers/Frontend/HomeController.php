@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Frontend;
 
 use Illuminate\Http\Request;
+use App\Events\Home;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -23,6 +25,8 @@ class HomeController extends Controller
     public function index()
     {
         //dump(session()->all());
+        $user=Auth::user();
+        event(new Home($user));
         return view('frontend.home');
     }
     

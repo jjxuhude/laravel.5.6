@@ -16,6 +16,9 @@ class EventServiceProvider extends ServiceProvider
         'App\Events\Event' => [
             'App\Listeners\EventListener',
         ],
+        'App\Events\Home'=>[
+            'App\Listeners\Home'
+        ]
     ];
 
     /**
@@ -28,5 +31,8 @@ class EventServiceProvider extends ServiceProvider
         parent::boot();
 
         //
+        Event::listen('event.name', function ($foo, $bar) {
+            //
+        });
     }
 }
