@@ -2,7 +2,6 @@
 
 namespace App\Listeners;
 
-use App\Events\Home;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
@@ -24,7 +23,7 @@ class Home
      * @param  Home  $event
      * @return void
      */
-    public function handle(Home $event)
+    public function handle(\App\Events\Home $event)
     {
         //
         $user=$event->user;
