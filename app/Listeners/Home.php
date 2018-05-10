@@ -27,5 +27,6 @@ class Home
     {
         //
         $user=$event->user;
+        dump($user);
     }
 }
