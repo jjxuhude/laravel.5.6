@@ -12,6 +12,8 @@
         <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
 
         <!-- Styles -->
+        <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+        
         <style>
             html, body {
                 background-color: #fff;
@@ -80,10 +82,14 @@
 
             <div class="content">
          
-
+				<div id="app">
+				
+				</div>
             
             </div>
         </div>
-        
+        <!-- Scripts -->
+        <script src="{{ asset('js/app.js') }}" defer></script>
+<!--         <script src="//{{ Request::getHost() }}:6001/socket.io/socket.io.js"></script> -->
     </body>
 </html>
