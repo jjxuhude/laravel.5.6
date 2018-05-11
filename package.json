@@ -20,7 +20,9 @@
         "vue": "^2.5.7"
     },
     "dependencies": {
+        "ajv": "^6.5.0",
         "laravel-echo": "^1.3.5",
+        "npm-install-peers": "^1.2.1",
         "pusher-js": "^4.2.2"
     }
 }
