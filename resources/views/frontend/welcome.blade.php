@@ -14,6 +14,23 @@
         <!-- Styles -->
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
         
+        <script src="https://js.pusher.com/4.0/pusher.min.js"></script>
+        <script>
+ 
+            // Enable pusher logging - don't include this in production
+            Pusher.logToConsole = true;
+         
+            var pusher = new Pusher('XXX', {
+              cluster: 'ap1',
+              encrypted: true
+            });
+         
+            var channel = pusher.subscribe('my-channel');
+            channel.bind('my-event', function(data) {
+              alert(data.info);
+            });
+          </script>
+        
         <style>
             html, body {
                 background-color: #fff;

@@ -23,10 +23,25 @@ class ChatMessageWasReceived extends Event implements ShouldBroadcast
         $this->user = $user;
     }
 
+    /**
+     * 指定广播频道(对应前端的频道)
+     * Get the channels the event should be broadcast on.
+     *
+     * @return array
+     */
     public function broadcastOn()
     {
-        return [
-            "chat-room.1"
-        ];
+        return ['my-channel'];
     }
+    
+    /**
+     * 指定广播事件(对应前端的事件)
+     * @return string
+     */
+    public function broadcastAs()
+    {
+        return 'my-event';
+    }
+    
+
 }

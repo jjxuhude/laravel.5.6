@@ -504,6 +504,8 @@ class Pusher implements LoggerAwareInterface
         $this->log('trigger POST: {post_value}', compact('post_value'));
 
         curl_setopt($ch, CURLOPT_POSTFIELDS, $post_value);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
 
         $response = $this->exec_curl($ch);
 

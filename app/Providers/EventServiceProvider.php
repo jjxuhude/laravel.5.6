@@ -18,7 +18,10 @@ class EventServiceProvider extends ServiceProvider
         ],
         'App\Events\Home'=>[
             'App\Listeners\Home'
-        ]
+        ],
+        'App\Events\ChatMessageWasReceived'=>[
+            'App\Listeners\ChatMessageWasReceivedListen' 
+        ],
     ];
 
     /**
