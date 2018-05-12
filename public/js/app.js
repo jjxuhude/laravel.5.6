@@ -14394,6 +14394,9 @@ var orderId = window.Cookies.get("user_id");
 window.Echo.private('order.' + orderId).listen('.server.created', function (e) {
     console.log(e);
 });
+window.Echo.channel('message').listen('.server.created', function (e) {
+    console.log(e);
+});
 
 /***/ }),
 /* 17 */

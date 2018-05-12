@@ -62,3 +62,6 @@ if (token) {
  window.Echo.private(`order.${orderId}`).listen('.server.created', (e) => {
      console.log(e);
  });
+ window.Echo.channel('message').listen('.server.created', (e) => {
+     console.log(e);
+ });
