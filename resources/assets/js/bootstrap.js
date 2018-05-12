@@ -45,12 +45,20 @@ if (token) {
  */
 
  import Echo from 'laravel-echo'
+ import Cookies from 'js-cookie'
 
  window.Pusher = require('pusher-js');
+ window.Cookies=Cookies
+
 
  window.Echo = new Echo({
      broadcaster: 'pusher',
-     key: process.env.MIX_PUSHER_APP_KEY,
-     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
+     key: '4ed3c880c177d2eb6e69',
+     cluster: 'ap1',
      encrypted: true
+ });
+ 
+ var orderId=window.Cookies.get("user_id");
+ window.Echo.private(`order.${orderId}`).listen('.server.created', (e) => {
+     console.log(e);
  });

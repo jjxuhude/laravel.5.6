@@ -9,17 +9,20 @@ use Illuminate\Broadcasting\PresenceChannel;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
+use Illuminate\Contracts\Broadcasting\ShouldBroadcastNow;
 
 class ChatMessageWasReceived extends Event implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 	
-	public $chatMessage;
+	public $order;
     public $user;
 
-   public function __construct($chatMessage, $user)
+
+    
+   public function __construct($order, $user)
     {
-        $this->chatMessage = $chatMessage;
+        $this->order = $order;
         $this->user = $user;
     }
 
@@ -31,17 +34,38 @@ class ChatMessageWasReceived extends Event implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return ['my-channel'];
+        dump('order.'.$this->user->id);
+        return new PrivateChannel('order.'.$this->user->id);
     }
     
     /**
-     * 指定广播事件(对应前端的事件)
+     * 事件的广播名称.
+     *
      * @return string
      */
     public function broadcastAs()
     {
-        return 'my-event';
+        return 'server.created';
     }
     
+    
+    /**
+     * 获取广播数据
+     *
+     * @return array
+     */
+    public function broadcastWith(){
+        return ['id' => $this->user->name];
+    }
+
+//     /**
+//      * 判定事件是否广播
+//      *
+//      * @return bool
+//      */
+//     public function broadcastWhen()
+//     {
+//         return true;
+//     }   
 
 }
