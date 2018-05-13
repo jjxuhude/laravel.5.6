@@ -15,6 +15,7 @@ class Kernel extends ConsoleKernel
     protected $commands = [
         //
 		Commands\SendChatMessage::class,
+		Commands\Demo1::class,
     ];
 
     /**
@@ -27,6 +28,16 @@ class Kernel extends ConsoleKernel
     {
         // $schedule->command('inspire')
         //          ->hourly();
+        $schedule->call(function () {
+            \Log::info('每分钟运行');
+        })->cron('* * * * *');
+        
+        
+        $schedule->call(function () {
+            \Log::info('我的 任务');
+        })->cron('* * * * *');
+        
+        $schedule->command ('demo1:send 命令计划任务')->cron('* * * * *');
     }
 
     /**
