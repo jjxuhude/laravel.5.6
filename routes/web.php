@@ -13,6 +13,8 @@ use App\Http\Controllers\Frontend\RequestController;
  * |
  */
 
+Route::get('mail/send','MailController@send');
+
 //客户端凭证授权令牌
 Route::get('/credentials', function(\Illuminate\Http\Request $request) {
     $guzzle = new GuzzleHttp\Client;

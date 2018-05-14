@@ -26,4 +26,6 @@ class Controller extends BaseController
             'methods' => $methods
         ]);
     }
+    
+
 }
