@@ -16,6 +16,8 @@ class Controller extends BaseController
         $methods = $refClass->getMethods(\ReflectionMethod::IS_PUBLIC);
         $methods = array_filter($methods, function ($method) {
             if ($method->class == get_class($this)) {
+                $router = strtolower(strstr(basename(str_replace('\\', DIRECTORY_SEPARATOR, $method->class)), 'Controller', true));
+                $method->router=$router;
                 $method->desc = resolve('routeConfig')->getDocParam($method, 'desc');
                 $method->doc = resolve('docParser')->parse($method);
                 return $method;

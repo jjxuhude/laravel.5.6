@@ -1,6 +1,7 @@
 <?php
 use App\Http\Controllers\Frontend\BladeController;
 use App\Http\Controllers\Frontend\RequestController;
+use App\Http\Controllers\Frontend\DbController;
 
 /*
  * |--------------------------------------------------------------------------
@@ -112,6 +113,7 @@ Route::group([
     $routeConfig = resolve('routeConfig');
     $routeConfig->setController(BladeController::class);
     $routeConfig->setController(RequestController::class);
+    $routeConfig->setController(DbController::class);
 });
 
 // 后台
