@@ -21,12 +21,13 @@ class DbController extends Controller
 
     /**
      * @desc hasOne
-     * 
+     * @method get
+     * @param integer $id
      * @return \Illuminate\View\View|\Illuminate\Contracts\View\Factory
      */
-    function demo1()
+    function demo1($id)
     {
-        $user=User::find(1);
+        $user=User::find($id);
         dump($user->address->toArray());
         
         $address=Address::find(1);

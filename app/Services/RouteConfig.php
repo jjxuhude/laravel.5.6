@@ -25,6 +25,7 @@ class RouteConfig
                 \Route::get('/' . $route, '\\' . $method->class . "@" . $method->name);
             }
             
+            
             switch ($this->getDocParam($method, 'method')) {
                 case 'post':
                     \Route::post('/' . $route . '/' . $method->name, '\\' . $method->class . "@" . $method->name);
@@ -43,7 +44,21 @@ class RouteConfig
                     break;
                 case 'get':
                 default:
-                    \Route::get('/' . $route . '/' . $method->name, '\\' . $method->class . "@" . $method->name);
+                    $params=resolve('docParser')->parse($method)['param'] ?? [];
+                    $data=[];
+                    foreach($params as $param){
+                        $paramArr=explode('$',$param);
+                        if(count($paramArr)==2){
+                            $data[]='{'.$paramArr[1].'}';
+                        }
+                    }
+                    $query="";
+                    if(count($data)==1){
+                        $query='/'.$data[0];
+                    }elseif(count($data)>1){
+                        $query='/'.join('/',$data);
+                    }
+                    \Route::get('/' . $route . '/' . $method->name.$query, '\\' . $method->class . "@" . $method->name);
                     break;
             }
         }
@@ -58,7 +73,8 @@ class RouteConfig
         if (isset($match[1])) {
             return trim($match[1]);
         } else {
-            return $method->name;
+            //return $method->name;
+            return '';
         }
     }
 
