@@ -16,6 +16,7 @@ class Kernel extends ConsoleKernel
         //
 		Commands\SendChatMessage::class,
 		Commands\Demo1::class,
+        Commands\Job1::class,
     ];
 
     /**
