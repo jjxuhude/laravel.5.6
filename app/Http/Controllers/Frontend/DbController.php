@@ -9,9 +9,9 @@ use App\Model\Post;
 class DbController extends Controller
 {
 
+    
     /**
      * Db模板测试
-     * 
      * @return \Illuminate\View\View|\Illuminate\Contracts\View\Factory
      */
     function index()
