@@ -100,13 +100,13 @@ class OauthController extends Controller
         if ($request->has('password')) {
             return $this->passwordToken();
         } // 刷新token
-elseif ($request->has('refresh_token')) {
+        elseif ($request->has('refresh_token')) {
             return $this->refreshToken();
         } // 获取token
-elseif ($request->get('code')) {
+        elseif ($request->get('code')) {
             return $this->getTokenByCode($request);
         } // 客户端凭证授权令牌
-elseif ($request->has('credentials')) {
+        elseif ($request->has('credentials')) {
             return $this->credentialsToken();
         } else {
             return 'Access Denied';
