@@ -131,12 +131,14 @@ class DocParser
         );
     }
 
-    private function formatParamOrReturn($string)
+    public function formatParamOrReturn($string)
     {
         $pos = strpos($string, ' ');
         
         $type = substr($string, 0, $pos);
         return '【 ' . $type . ' 】 ' . substr($string, $pos + 1);
     }
+    
+   
 }  
 
