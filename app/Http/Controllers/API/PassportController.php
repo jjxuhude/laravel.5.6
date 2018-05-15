@@ -29,13 +29,11 @@ class PassportController extends Controller
     }
 
     /**
-     * login api
+     * 
      *
      * @method post
-     * @param
-     *            string email
-     * @param
-     *            string password
+     * @param string email
+     * @param string password
      * @return \Illuminate\Http\Response
      */
     public function login()
@@ -60,14 +58,10 @@ class PassportController extends Controller
      * Register api
      *
      * @method post
-     * @param
-     *            string name
-     * @param
-     *            string email
-     * @param
-     *            string password
-     * @param
-     *            string c_password
+     * @param string name
+     * @param string email
+     * @param string password
+     * @param string c_password
      * @return \Illuminate\Http\Response
      */
     public function register(Request $request)
