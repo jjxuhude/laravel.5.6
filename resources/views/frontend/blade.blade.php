@@ -14,7 +14,7 @@
 		<tr>
 				<td><?php echo  $method->name?></td>
 				<td><a
-					href="<?php echo url('/'.$method->router.'/'.$method->name)?>"><?php echo  $method->desc?></a>
+					href="<?php echo url('/'.$method->router.'/'.$method->name)?>"><?php echo  substr($method->desc?:$method->doc['description'],0,50)?></a>
 				</td>
 				<td><?php echo strtoupper($method->doc['method']??'')?></td>
 				<td>
