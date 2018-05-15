@@ -30,7 +30,7 @@ class PassportController extends Controller
 
     /**
      * 
-     *
+     * api login
      * @method post
      * @param string email
      * @param string password
