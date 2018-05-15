@@ -3,6 +3,38 @@ namespace App\Http\Controllers\API;
 
 use Illuminate\Http\Request;
 
+/**
+ * 
+ * @author Jack.Xu1
+ * @desc 
+ * 1.composer require laravel/passport
+ * 2.php artisan migrate
+ * 3.php artisan passport:install
+ * 4.你需要在 app/Providers/AuthServiceProvider.php 的 boot 方法中调用 Passport::routes 方法
+ * 5.config/auth.php 中，需要设置 api 认证 guard 的 driver 选项为 passport
+ * 6.生成前端vue组件：php artisan vendor:publish --tag=passport-components
+ * Vue.component(
+        'passport-clients',
+        require('./components/passport/Clients.vue')
+    );
+    
+    Vue.component(
+        'passport-authorized-clients',
+        require('./components/passport/AuthorizedClients.vue')
+    );
+    
+    Vue.component(
+        'passport-personal-access-tokens',
+        require('./components/passport/PersonalAccessTokens.vue')
+    );
+    npm run dev
+    <passport-clients></passport-clients>
+    <passport-authorized-clients></passport-authorized-clients>
+    <passport-personal-access-tokens></passport-personal-access-tokens>
+    7.部署 Passport： php artisan passport:keys
+    8.创建客户端：php artisan passport:client
+ *
+ */
 class OauthController extends Controller
 {
 
