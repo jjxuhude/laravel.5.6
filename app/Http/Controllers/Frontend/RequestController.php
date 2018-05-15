@@ -70,5 +70,16 @@ class RequestController extends Controller
     {
         phpinfo();
     }
+    
+    /**
+     * @desc 加密解密
+     */
+    function crypt(){
+        $enString=encrypt('user01');
+        dump($enString);
+        $deString= decrypt($enString);
+        dump($deString);
+        
+    }
 }
 

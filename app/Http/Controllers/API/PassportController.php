@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Validator;
+use App\Model\User;
 
 class PassportController extends Controller
 {
@@ -13,7 +14,9 @@ class PassportController extends Controller
     protected $routePrefix='api';
     
     /**
-     * @desc api list
+     * @desc 管理私人访问令牌,私人访问令牌总是一直有效的
+     *       php artisan passport:client --personal 
+     *       涉及的表oauth_clients和oauth_personal_access_clients
      * @method get
      * {@inheritDoc}
      * @see \App\Http\Controllers\API\Controller::index()
@@ -51,7 +54,7 @@ class PassportController extends Controller
      */
     public function register(Request $request)
     {
-        $validator = Validator::make($request->all(), [
+        $validator = \Illuminate\Support\Facades\Validator::make($request->all(), [
             'name' => 'required',
             'email' => 'required|email',
             'password' => 'required',
@@ -79,7 +82,6 @@ class PassportController extends Controller
      function getDetails()
     {
         $user = Auth::user();
-        dump($user);
         return response()->json(['success' => $user], $this->successStatus);
     }
 }

@@ -27,7 +27,7 @@ class Home
     {
         //
         $user=$event->user;
-        $user->name="名称已经修改为API";
+        $user->name="名称已经修改为API:".$user->name;
         //dump($user->toArray());
     }
 }
