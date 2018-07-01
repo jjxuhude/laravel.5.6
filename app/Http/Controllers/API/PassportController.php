@@ -14,7 +14,7 @@ class PassportController extends Controller
     protected $routePrefix = 'api';
 
     /**
-     * 管理私人访问令牌,私人访问令牌总是一直有效的
+     * 管理私人访问令牌,私人访问令牌总永不过期
      * php artisan passport:client --personal
      * 涉及的表oauth_clients和oauth_personal_access_clients
      *
