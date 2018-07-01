@@ -1,6 +1,5 @@
 <?php
 namespace App\Http\Controllers\API;
-
 use Illuminate\Http\Request;
 
 /**
@@ -9,7 +8,8 @@ use Illuminate\Http\Request;
  *         1.composer require laravel/passport
  *         2.php artisan migrate
  *         3.php artisan passport:install
- *         4.你需要在 app/Providers/AuthServiceProvider.php 的 boot 方法中调用 Passport::routes 方法
+ *         4.你需要在 app/Providers/AuthServiceProvider.php 的 boot 方法中调用
+ *         Passport::routes 方法
  *         5.config/auth.php 中，需要设置 api 认证 guard 的 driver 选项为 passport
  *         6.生成前端vue组件：php artisan vendor:publish --tag=passport-components
  *         Vue.component(
@@ -37,6 +37,7 @@ use Illuminate\Http\Request;
 class OauthController extends Controller
 {
 
+    //以下是第三方授权方式
     const CLIENT_ID = 5;
 
     const CLIENT_SECRET = '7FU6Qs2BpClruEclLaa7MGZS2Tjf5p5FxN54Rfrj';
@@ -47,6 +48,7 @@ class OauthController extends Controller
 
     const REFRESH_TOKEN = 'def50200898e80486d8d2e2ab0b5b89e7193651a18301114ff0d97b0e4a00c1b71c683d4ddb6036ac6f313cd630aed4b677162d9ea72e75c0dc8b525dfa039137685d8250098380a280cade53976fa65889161eecf768ef986ebdf6b701d67dd4bbd0808ecb3697c1ae9d74c00d8ab3014984420432ae4a7368a520e078c165a65d1b412e02a5e20c78fc6af3168264617b84aa85d11a50361274790946cdfb763574c0472dffee3d3572518732239e4f4e5b624a7ef15aa0d6dcae9ca35f49cc87316b3c72291ee6e20af63c094d8b7aeb7091b4a9914d3472c6186b1e4497e25f18b764f774c2fab3e176e6fe67bebcef002f80ea5ca06b5439f8e3e969448e688d60be8bc2ee2ab546516101999f374852d253264c7b53b9f71ae96d46096371e718f54de8bff944a1fdaef6506e534f96637baf1f23a4361174ad10c8391545b96ceb2b784b18ac1984e1653e80176ff6ca5f6df21b6b02d6ae9bfaf2031c3';
 
+    //以下是密码授权方式
     const PASSWORD_CLIENT_ID = 2;
 
     const PASSWORD_CLIENT_SECRET = "68Z8L9bO6oauU4eYe9uX2m6DbChv13cITfWkztWp";
@@ -62,51 +64,53 @@ class OauthController extends Controller
      *
      * @see \App\Http\Controllers\API\Controller::index()
      */
-    public function index()
+    public function index ()
     {
         return parent::index();
     }
 
     /**
-     * php artisan passport:client 生成客户端
+     * php artisan passport:client 生成客户端，一个app应用只要生成1次
      *
      * @method get
      * @param number $client_id            
      * @return \Illuminate\Routing\Redirector|\Illuminate\Http\RedirectResponse
      */
-    public function redirect($client_id = 5)
+    public function redirect ($client_id = 5)
     {
-        $query = http_build_query([
-            'client_id' => $client_id,
-            'redirect_uri' => 'http://la.org/api/callback',
-            'response_type' => 'code',
-            'scope' => ''
-        ]);
+        $query = http_build_query(
+                [
+                        'client_id' => $client_id,
+                        'redirect_uri' => 'http://la.org/api/callback',
+                        'response_type' => 'code',
+                        'scope' => ''
+                ]);
         
         return redirect(url('oauth/authorize') . '?' . $query);
     }
 
     /**
      * 获取服务器授权token
-     * http://la.org/api/callback?refresh_token
      * http://la.org/api/callback?password
+     * http://la.org/api/callback?credentials
+     * http://la.org/api/callback?refresh_token
      *
      * @param \Illuminate\Http\Request $request            
      * @return string|mixed
      */
-    public function callback(\Illuminate\Http\Request $request)
+    public function callback (\Illuminate\Http\Request $request)
     {
         // 密码token
         if ($request->has('password')) {
             return $this->passwordToken();
         } // 刷新token
-elseif ($request->has('refresh_token')) {
-            return $this->refreshToken();
-        } // 获取token
-elseif ($request->get('code')) {
-            return $this->getTokenByCode($request);
+        elseif ($request->has('refresh_token')) {
+                    return $this->refreshToken();
+        } // 获取token,第三方登录方式获取token,跳转的url是组件自动生成的。redirect(url('oauth/authorize') . '?' . $query);
+        elseif ($request->get('code')) {
+                    return $this->getTokenByCode($request);
         } // 客户端凭证授权令牌
-elseif ($request->has('credentials')) {
+        elseif ($request->has('credentials')) {
             return $this->credentialsToken();
         } else {
             return 'Access Denied';
@@ -119,18 +123,22 @@ elseif ($request->has('credentials')) {
      * @param unknown $request            
      * @return mixed
      */
-    private function getTokenByCode($request)
+    private function getTokenByCode ($request)
     {
         $http = new \GuzzleHttp\Client();
-        $response = $http->post(url('oauth/token'), [
-            'form_params' => [
-                'grant_type' => 'authorization_code',
-                'client_id' => self::CLIENT_ID, // your client id
-                'client_secret' => self::CLIENT_SECRET, // your client secret
-                'redirect_uri' => self::REDIRECT_URI,
-                'code' => $request->code
-            ]
-        ]);
+        $response = $http->post(url('oauth/token'), 
+                [
+                        'form_params' => [
+                                'grant_type' => 'authorization_code',
+                                'client_id' => self::CLIENT_ID, // your client
+                                                                // id
+                                'client_secret' => self::CLIENT_SECRET, // your
+                                                                        // client
+                                                                        // secret
+                                'redirect_uri' => self::REDIRECT_URI,
+                                'code' => $request->code
+                        ]
+                ]);
         
         return json_decode((string) $response->getBody(), true);
     }
@@ -140,42 +148,44 @@ elseif ($request->has('credentials')) {
      *
      * @return mixed
      */
-    private function refreshToken()
+    private function refreshToken ()
     {
         $http = new \GuzzleHttp\Client();
-        $response = $http->post(url('oauth/token'), [
-            'form_params' => [
-                'grant_type' => 'refresh_token',
-                'refresh_token' => self::REFRESH_TOKEN,
-                'client_id' => self::CLIENT_ID,
-                'client_secret' => self::CLIENT_SECRET,
-                'scope' => ''
-            ]
-        ]);
+        $response = $http->post(url('oauth/token'), 
+                [
+                        'form_params' => [
+                                'grant_type' => 'refresh_token',
+                                'refresh_token' => self::REFRESH_TOKEN,
+                                'client_id' => self::CLIENT_ID,
+                                'client_secret' => self::CLIENT_SECRET,
+                                'scope' => ''
+                        ]
+                ]);
         
         return json_decode((string) $response->getBody(), true);
     }
 
     /**
      * 密码token
-     * php artisan passport:client --password
+     * php artisan passport:client --password //生成密码授权客户端
      *
      * @return mixed
      */
-    private function passwordToken()
+    private function passwordToken ()
     {
         $http = new \GuzzleHttp\Client();
         
-        $response = $http->post(url('oauth/token'), [
-            'form_params' => [
-                'grant_type' => 'password',
-                'client_id' => self::PASSWORD_CLIENT_ID,
-                'client_secret' => self::PASSWORD_CLIENT_SECRET,
-                'username' => self::USERNAME,
-                'password' => self::PASSWORD,
-                'scope' => ''
-            ]
-        ]);
+        $response = $http->post(url('oauth/token'), 
+                [
+                        'form_params' => [
+                                'grant_type' => 'password',
+                                'client_id' => self::PASSWORD_CLIENT_ID,
+                                'client_secret' => self::PASSWORD_CLIENT_SECRET,
+                                'username' => self::USERNAME,
+                                'password' => self::PASSWORD,
+                                'scope' => ''
+                        ]
+                ]);
         
         $data = json_decode((string) $response->getBody(), true);
         
@@ -189,18 +199,19 @@ elseif ($request->has('credentials')) {
      *
      * @return mixed
      */
-    private function credentialsToken()
+    private function credentialsToken ()
     {
         $guzzle = new \GuzzleHttp\Client();
         
-        $response = $guzzle->post(url('oauth/token'), [
-            'form_params' => [
-                'grant_type' => 'client_credentials',
-                'client_id' => self::CLIENT_ID,
-                'client_secret' => self::CLIENT_SECRET,
-                'scope' => '*'
-            ]
-        ]);
+        $response = $guzzle->post(url('oauth/token'), 
+                [
+                        'form_params' => [
+                                'grant_type' => 'client_credentials',
+                                'client_id' => self::CLIENT_ID,
+                                'client_secret' => self::CLIENT_SECRET,
+                                'scope' => '*'
+                        ]
+                ]);
         
         return json_decode((string) $response->getBody(), true);
     }
