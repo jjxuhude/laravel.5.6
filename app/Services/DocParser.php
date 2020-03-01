@@ -62,7 +62,7 @@ class DocParser
         }
         $desc = implode(' ', $desc);
         if (! empty($desc))
-            $this->params['long_description'] = $desc;
+            $this->params['description'] = $desc;
     }
 
     private function parseLine($line)

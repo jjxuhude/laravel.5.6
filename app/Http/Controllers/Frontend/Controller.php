@@ -23,7 +23,7 @@ class Controller extends BaseController
                 return $method;
             }
         });
-        
+
         return view('frontend.blade', [
             'methods' => $methods
         ]);
