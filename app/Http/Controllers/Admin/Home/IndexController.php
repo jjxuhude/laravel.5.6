@@ -6,7 +6,7 @@ use Illuminate\Routing\Controller;
 class IndexController extends Controller
 {
     public function index(){
-        dump(session()->all());
+//        dump(session()->all());
         return view('admin.home.index');
     }
 }

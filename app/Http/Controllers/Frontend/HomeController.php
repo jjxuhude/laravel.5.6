@@ -19,35 +19,25 @@ class HomeController extends Controller
         $this->middleware('auth');
     }
 
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
-        
-       // event(new \App\Events\ChatMessageWasReceived(Order::find(1), \App\Model\User::first()));
-//         $this->demo();
+		return $this->success(['game_id'=>123]);
 
-        
-        //dump(session()->all());
-        $user=Auth::user();
-        event(new Home($user));
-       // dump($user->toArray());
-        return view('frontend.home');
     }
     
     protected function demo(){
-        $options = array(
-            'cluster' => 'ap1',
-            'encrypted' => true
-        );
-        $pusher = new \Pusher\Pusher('4ed3c880c177d2eb6e69', '75fc581c693954d9c784', '523350', $options);
-        
-        $data['message'] = '你是谁';
-        $pusher->trigger('order.1', 'server.created', $data);
-    }
+		
+	}
+	
+	protected function success($data){
+		return [
+			'code'=>1,
+			'message'=>'success',
+			'data'=>$data
+		];
+	}
+
     
     
 }

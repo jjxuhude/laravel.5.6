@@ -33,6 +33,7 @@ Route::group([
     $routeConfig->setController(BladeController::class);
     $routeConfig->setController(RequestController::class);
     $routeConfig->setController(DbController::class);
+    Route::get('demo', 'DemoController@index');
 });
 
 // 后台
