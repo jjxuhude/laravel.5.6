@@ -181,6 +181,7 @@ class RelatedController extends Controller
         });
 
         dump ($users->toArray());
+
     }
 
 
