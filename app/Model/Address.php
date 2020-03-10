@@ -10,7 +10,7 @@ class Address extends Model
     protected $guarded=[];
     
     function user(){
-        return $this->belongsTo('App\Model\User')->withDefault();
+        return $this->belongsTo('App\Model\User','id')->withDefault();
     }
     
 }

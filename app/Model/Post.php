@@ -12,6 +12,6 @@ class Post extends Model
     public   $timestamps=false;
     
     function user(){
-        return $this->belongsTo('App\Model\User');
+        return $this->belongsTo('App\Model\User','id');
     }
 }

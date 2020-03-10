@@ -29,11 +29,16 @@ class User extends Authenticatable
     ];
     
     public function  address(){
-       return  $this->hasOne('App\Model\Address');
+       return  $this->hasOne('App\Model\Address','user_id');
     }
     
     public function posts(){
-        return $this->hasMany('App\Model\Post')->where('title','post 01');;
+        return $this->hasMany('App\Model\Post','user_id');
+            //->where('title','post 01');;
+    }
+
+    public function roles(){
+        return $this->belongsToMany(Role::class,'user_and_role','user_id','role_id');
     }
     
     
