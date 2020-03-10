@@ -180,9 +180,7 @@ class RelatedController extends Controller
             return $value->address;
         });
 
-        foreach ($users as $user) {
-            dump ($user->address?$user->address->toArray():"");
-        }
+        dump ($users->toArray());
     }
 
 
