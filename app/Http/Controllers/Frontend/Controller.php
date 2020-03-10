@@ -14,6 +14,7 @@ class Controller extends BaseController
     {
         $refClass = new \ReflectionClass($this);
         $methods = $refClass->getMethods(\ReflectionMethod::IS_PUBLIC);
+
         $methods = array_filter($methods, function ($method) {
             if ($method->class == get_class($this)) {
                 $router = strtolower(strstr(basename(str_replace('\\', DIRECTORY_SEPARATOR, $method->class)), 'Controller', true));
@@ -25,7 +26,8 @@ class Controller extends BaseController
         });
 
         return view('frontend.blade', [
-            'methods' => $methods
+            'methods' => $methods,
+            'refclass'=>$this
         ]);
     }
     

@@ -15,6 +15,6 @@ class Demo1 extends Command
     {
         // Fire off an event, just randomly grabbing the first user for now
         $message = $this->argument('message');
-        \Log::info($message);
+        \Log::debug($message);
     }
 }

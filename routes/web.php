@@ -33,6 +33,7 @@ Route::group([
     $routeConfig->setController(BladeController::class);
     $routeConfig->setController(RequestController::class);
     $routeConfig->setController(DbController::class);
+    $routeConfig->setController(\App\Http\Controllers\Frontend\RelatedController::class);
     Route::get('demo', 'DemoController@index');
 });
 
@@ -42,7 +43,7 @@ Route::group([
     'namespace' => 'Admin'
 ], function () {
     Route::get('/', 'Home\IndexController@index');
-    
+
     Route::get('login', 'Auth\LoginController@showLoginForm');
     Route::post('login', 'Auth\LoginController@login');
     Route::post('logout', 'Auth\LoginController@logout');
@@ -64,3 +65,7 @@ Route::group([
 
 
 
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

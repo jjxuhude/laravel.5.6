@@ -55,7 +55,10 @@ class ChatMessageWasReceived extends Event implements ShouldBroadcast
      * @return array
      */
     public function broadcastWith(){
-        return ['id' => $this->user->name];
+        return [
+            'user'=>'jack.xu1',
+            'id' => $this->user->name
+        ];
     }
 
 //     /**

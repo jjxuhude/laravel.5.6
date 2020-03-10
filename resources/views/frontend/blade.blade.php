@@ -13,15 +13,27 @@
 		<?php foreach($methods as $method):?>
 		<tr>
 				<td><?php echo  $method->name?></td>
-				<td><a
-					href="<?php echo url('/'.$method->router.'/'.$method->name)?>"><?php echo  substr($method->desc?:$method->doc['description'],0,150)?></a>
+				<?php
+					$refMethod =new \ReflectionMethod($refclass,$method->name);
+					$params=$refMethod->getParameters();
+					$query="";
+					array_map(function($param) use (&$query) {
+						if ($param->isOptional()) {
+							$query.='/'.$param->getDefaultValue();
+						}else{
+							$query.='/'.$param->name;
+						}
+					},$params);
+
+				?>
+				<td><a href="<?php echo url('/'.$method->router.'/'.$method->name.$query)?>"><?php echo  substr($method->desc?:$method->doc['description'],0,150)?></a>
 				</td>
 				<td><?php echo strtoupper($method->doc['method']??'')?></td>
 				<td>
 				<?php if(isset($method->doc['param'])): foreach($method->doc['param'] as $k=>$v):?>
 					<li> @param <?php echo $v?></li>
 				<?php endforeach;endif;?>
-			</td>
+				</td>
 		</tr>
 		<?php endforeach;?>
 	

@@ -10,36 +10,34 @@ use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 
-class ShippingStatusUpdated extends Event implements ShouldBroadcast
+class ShippingStatusUpdated implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
-	
 
+    /**
+     * Information about the shipping status update.
+     *
+     * @var string
+     */
+    public $update;
 
-   public function __construct($chatMessage, $user)
+    /**
+     * Create a new event instance.
+     *
+     * @return void
+     */
+    public function __construct()
     {
-
+        //
     }
 
     /**
-     * 指定广播频道(对应前端的频道)
-     * Get the channels the event should be broadcast on.
+     * Get the channels the event should broadcast on.
      *
-     * @return array
+     * @return \Illuminate\Broadcasting\Channel|array
      */
     public function broadcastOn()
     {
-        return ['my-channel'];
+        return new PrivateChannel('order.'.$this->update->order_id);
     }
-    
-    /**
-     * 指定广播事件(对应前端的事件)
-     * @return string
-     */
-    public function broadcastAs()
-    {
-        return 'my-event';
-    }
-    
-
 }

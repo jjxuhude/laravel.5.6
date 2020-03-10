@@ -19,6 +19,9 @@ class EventServiceProvider extends ServiceProvider
         'App\Events\Home'=>[
             'App\Listeners\Home'
         ],
+        'App\Events\MyEvent'=>[
+            'App\Listeners\MyListen'
+        ],
 
     
     ];

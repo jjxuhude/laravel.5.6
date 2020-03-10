@@ -32,8 +32,8 @@ class User extends Authenticatable
        return  $this->hasOne('App\Model\Address');
     }
     
-    public function post(){
-        return $this->hasMany('App\Model\Post');
+    public function posts(){
+        return $this->hasMany('App\Model\Post')->where('title','post 01');;
     }
     
     
