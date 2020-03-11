@@ -175,14 +175,87 @@ class RelatedController extends Controller
      * 延迟预加载 :去掉空值
      */
     function notEmpty(){
-        $users = User::all();
-        $users=$users->load('address')->filter(function ($value, $key){
-            return $value->address;
-        });
+
+        $users=User::has('address')->get();
 
         dump ($users->toArray());
 
     }
+
+    /**
+     * 同步数据1
+     */
+    function sync1(){
+        $user = User::find(3);
+        $data=[1,2];
+        $result = $user->roles()->sync($data);
+        dump($result);
+    }
+
+    /**
+     * 同步数据:附件数据
+     */
+    function sync2(){
+        $user = User::find(3);
+        $data=[1=>['brand'=>'111'],2=>['brand'=>'222']];
+        $result = $user->roles()->sync($data);
+        dump($result);
+    }
+
+
+    /**
+     * 添加一对多数据
+     * @param string $title
+     */
+    function create($title="评论内容"){
+
+        $user = User::find(3);
+        $result=$user->posts()->create(
+            ['title'=>$title]
+        );
+        dump($result);
+    }
+
+    /**
+     * 添加多数据
+     * @param string $title
+     */
+    function createMany($title="评论内容"){
+
+        $user = User::find(3);
+        $result=$user->posts()->createMany(
+            [
+                ['title'=>$title],
+                ['title'=>$title],
+                ['title'=>$title],
+            ]
+        );
+        dump($result);
+    }
+
+
+    /**
+     *  多对多，中间表附加数据,可能会有重复的值要设置外键，最好用sync
+     * @param int $userId
+     * @param int $roleId
+     * @param string $brand
+     */
+    function attach($userId = 3,$roleId=3,$brand="CSS"){
+        $user = User::find($userId);
+        $result= $user->roles()->attach($roleId,['brand'=>$brand]);
+        dump($result);
+    }
+
+    /**
+     * 删除
+     * @param int $userId
+     */
+    function detach($userId=3){
+        $user = User::find($userId);
+        $result=$user->roles()->detach();
+        dump($result);
+    }
+
 
 
 
