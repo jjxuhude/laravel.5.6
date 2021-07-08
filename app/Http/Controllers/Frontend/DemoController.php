@@ -10,81 +10,63 @@ class DemoController extends Controller
 {
 
 
+    /**
+     * 常用方法
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function index()
     {
-        $data = $this->start_game();
-        $data = $this->get_game_top_list();
-
-        return $this->success($data);
-
+        return parent::index();
     }
 
-    protected function start_game(){
-        return    $data=[
-            'game_id'=>123,
-            'open_id'=>'1234567890',
-            'start_time'=>'2019-11-25 16:07:25'
-        ];;
+    /**
+     * 搜索某个字符串之前
+     * @return string
+     */
+    public function search1(){
+        return strstr('my name jack.xu','jack',true);
     }
 
-    protected function get_game_top_list(){
-        return
-        ['top'=>[
-            [
-                'game_id'=>1,
-                'open_id'=>'1234567890',
-                'nicename'=>'jack.xu1',
-                'score'=>200,
-                'start_time'=>'2019-11-25 16:07:25'
-            ],
-            [
-                'game_id'=>2,
-                'open_id'=>'1234567890',
-                'nicename'=>'jack.xu2',
-                'score'=>190,
-                'start_time'=>'2019-11-25 16:07:25'
-            ],
-            [
-                'game_id'=>3,
-                'open_id'=>'1234567890',
-                'nicename'=>'jack.xu3',
-                'score'=>180,
-                'start_time'=>'2019-11-25 16:07:25'
-            ],
-            [
-                'game_id'=>4,
-                'open_id'=>'1234567890',
-                'nicename'=>'jack.xu4',
-                'score'=>170,
-                'start_time'=>'2019-11-25 16:07:25'
-            ],
-            [
-                'game_id'=>5,
-                'open_id'=>'1234567890',
-                'nicename'=>'jack.xu5',
-                'score'=>160,
-                'start_time'=>'2019-11-25 16:07:25'
-            ]
-        ],
-            'own'=>[
-                'game_id'=>123,
-                'open_id'=>'1234567890',
-                'nicename'=>'jack.xu',
-                'score'=>150,
-                'start_time'=>'2019-11-25 16:07:25'
-            ]
-        ];
+
+    /**
+     * 搜索某个字符串之后
+     * @return false|int
+     */
+    public function search2(){
+         preg_match('/jack(.*)/','my name jack.xu',$match);
+         return $match[1];
+    }
+
+    /**
+     * 替换
+     * @return string
+     */
+    public function replace1(){
+        $str = 'my name xuhuade';
+        dump($str);
+        $str= strtr($str,['xuhuade'=>'jack']);
+        return $str;
+    }
+
+    /**
+     * first
+     */
+    public function first(){
+        $user=\DB::table('users')->where('id',9999999999999)->first();
+        dump($user);
+    }
+
+    /**
+     * ajax
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function ajax(){
+        return view('frontend.demo.ajax');
     }
 
 
 
-    protected function success($data){
-        return [
-            'code'=>1,
-            'message'=>'success',
-            'data'=>$data
-        ];
-    }
 
     
    

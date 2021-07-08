@@ -15,6 +15,22 @@ $app = new Illuminate\Foundation\Application(
     realpath(__DIR__.'/../')
 );
 
+if(PHP_SAPI == 'cli'){
+    $brand="";
+    array_map(function($item) use (&$brand){
+        if(strpos($item,'--env=')===0 && strlen($item)>6){
+            $brand =strtoupper(strtr($item,['--env='=>'']));
+        }
+    },$argv);
+    if($brand){
+        $loader= new \Dotenv\Loader(app()->environmentPath());
+        $_SERVER['HTTP_BRAND_CODE'] = $brand;
+        $loader->setEnvironmentVariable('APPID',getBrandConfig('APP','APPID'));
+        $loader->setEnvironmentVariable('SECRET',getBrandConfig('APP','SECRET'));
+        $loader->setEnvironmentVariable('MAIL_USERNAME',"jack@163.com");
+    }
+}
+
 /*
 |--------------------------------------------------------------------------
 | Bind Important Interfaces

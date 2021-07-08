@@ -1,0 +1,116 @@
+<?php
+/*
+此文件在git上是忽略的,在uat服务器和生产服务器需要手工修改数据库的配置
+后台数据库：多品牌共用套，所有直接配置在.env里面
+模块数据库：多品牌对应独立的数据库，需要配置DATABASES
+
+demo：getBrandConfig('DATABASES','DB_READ_HOST');
+demo：getBrandConfig('APP','APPID');
+*/
+
+//相同的配置
+$base=[
+    'DATABASES'=>[
+        'CSS'=>[
+            'DB_READ_HOST'=>'192.168.111.1',
+            'DB_WRITE_HOST'=>'192.168.111.1',
+            'DB_PORT'=>'3306',
+            'DB_DATABASE'=>'css_ii_order',
+            'DB_USERNAME'=>'magento2',
+            'DB_PASSWORD'=>'',
+        ],
+        'MB'=>[
+            'DB_READ_HOST'=>'rm-n9edp0d5b30389531ho.mysql.rds.aliyuncs.com',
+            'DB_WRITE_HOST'=>'rm-n9edp0d5b30389531ho.mysql.rds.aliyuncs.com',
+            'DB_PORT'=>'3306',
+            'DB_DATABASE'=>'mb_ii_uat_order',
+            'DB_USERNAME'=>'cssecuat',
+            'DB_PASSWORD'=>'WObiZsV0',
+        ],
+        'MG'=>[
+            'DB_READ_HOST'=>'rm-n9edp0d5b30389531ho.mysql.rds.aliyuncs.com',
+            'DB_WRITE_HOST'=>'rm-n9edp0d5b30389531ho.mysql.rds.aliyuncs.com',
+            'DB_PORT'=>'3306',
+            'DB_DATABASE'=>'mg_ii_uat_order',
+            'DB_USERNAME'=>'cssecuat',
+            'DB_PASSWORD'=>'WObiZsV0',
+        ],
+        'PROMESSA'=>[
+            'DB_READ_HOST'=>'',
+            'DB_WRITE_HOST'=>'',
+            'DB_PORT'=>'3306',
+            'DB_DATABASE'=>'',
+            'DB_USERNAME'=>'',
+            'DB_PASSWORD'=>'',
+        ],
+        'EMPHASIS'=>[
+            'DB_READ_HOST'=>'',
+            'DB_WRITE_HOST'=>'',
+            'DB_PORT'=>'3306',
+            'DB_DATABASE'=>'',
+            'DB_USERNAME'=>'',
+            'DB_PASSWORD'=>'',
+        ]
+    ]
+];
+
+//不同的配置
+$data = [
+    //企业微信跳转测试APP
+    'UAT'=>[
+        "APP"=>[
+            'CSS'=>[
+                'APPID'=>'wx68a9f5057fbd4944',
+                'SECRET'=>'113e7069f05596999db33c7ceb6f5dcd',
+            ],
+            'MB'=>[
+                'APPID'=>'',
+                'SECRET'=>'',
+            ],
+            'MG'=>[
+                'APPID'=>'',
+                'SECRET'=>'',
+            ],
+            'PROMESSA'=>[
+                'APPID'=>'',
+                'SECRET'=>'',
+            ],
+            'EMPHASIS'=>[
+                'APPID'=>'',
+                'SECRET'=>'',
+            ],
+        ]
+    ],
+    //商城APP
+    'PRODUCTION'=>[
+        "APP"=>[
+            'CSS'=>[
+                'APPID'=>'wxf387a3cca85b08fa',
+                'SECRET'=>'8617073d54dcecb94d2f5321be8d1488',
+            ],
+            'MB'=>[
+                'APPID'=>'',
+                'SECRET'=>'',
+            ],
+            'MG'=>[
+                'APPID'=>'',
+                'SECRET'=>'',
+            ],
+            'PROMESSA'=>[
+                'APPID'=>'',
+                'SECRET'=>'',
+            ],
+            'EMPHASIS'=>[
+                'APPID'=>'',
+                'SECRET'=>'',
+            ],
+        ]
+    ]
+
+];
+
+return array_map(function ($app) use ($base) {
+    return array_merge($app,$base);
+},$data);
+
+?>

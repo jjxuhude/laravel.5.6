@@ -34,7 +34,11 @@ Route::group([
     $routeConfig->setController(RequestController::class);
     $routeConfig->setController(DbController::class);
     $routeConfig->setController(\App\Http\Controllers\Frontend\RelatedController::class);
-    Route::get('demo', 'DemoController@index');
+    $routeConfig->setController(\App\Http\Controllers\Frontend\DemoController::class);
+    $routeConfig->setController(\App\Http\Controllers\Frontend\SwooleController::class);
+    $routeConfig->setController(\App\Http\Controllers\Frontend\PptController::class);
+    Route::get('demo/ajax', '\App\Http\Controllers\Frontend\DemoController@ajax');
+
 });
 
 // 后台

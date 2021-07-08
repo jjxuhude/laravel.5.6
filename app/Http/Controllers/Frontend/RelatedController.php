@@ -7,7 +7,9 @@ use App\Model\Post;
 use App\Model\Role;
 use App\Model\User;
 use App\Services\DocParser;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Facades\App;
+use function PHPSTORM_META\type;
 
 class RelatedController extends Controller
 {
@@ -35,18 +37,6 @@ class RelatedController extends Controller
 
 
     /**
-     * 一对一反向关联
-     * @param int $addressId
-     * @return mixed
-     */
-    function belongsTo1($addressId=1){
-        $address =Address::find($addressId);
-        dd($address->user()->toSql());
-        return $address->user->toArray();
-    }
-
-
-    /**
      * 一对多模型
      * @method GET
      * @param int $id
@@ -59,6 +49,42 @@ class RelatedController extends Controller
     }
 
     /**
+     * 一对多模型(指定用戶)
+     * @param int $id
+     */
+    function hasMany1($id=2){
+        $user = User::with(['posts'=>function(HasMany $query){
+            $query->where('id','>',16);
+        }])->find($id);
+
+        dump($user->posts->count());
+        dump(count($user->posts));
+        dump($user->toArray());
+    }
+
+    /**
+     * 一对多模型(过滤有值)
+     * @param int $id
+     */
+    function hasMany2($id=1){
+        $list=User::has('posts')->with(['posts'=>function(HasMany $query){
+            $query->where('title','like','%06%');
+        }])->get();
+        dump($list->toArray());
+    }
+
+
+    /**
+     * 一对一反向关联
+     * @param int $addressId
+     * @return mixed
+     */
+    function belongsTo1($addressId=1){
+        $address =Address::find($addressId);
+        return $address->user->toArray();
+    }
+
+    /**
      * 一对多反向关联:通过帖子找用户
      * @param int $postId
      * @return mixed
@@ -68,6 +94,11 @@ class RelatedController extends Controller
         //dump($post->user()->toSql());
         return $post->user->toArray();
     }
+	
+	
+	
+
+
 
     /**
      * 多对多 通过用户找角色
@@ -75,7 +106,7 @@ class RelatedController extends Controller
      */
     function belongsToMany1($userId=1){
         $user = User::find($userId);
-        return $user->roles->toArray();
+        dump($user->roles->toArray());
     }
 
     /**
@@ -99,6 +130,7 @@ class RelatedController extends Controller
         return $role->usersPivot->toArray();
     }
 
+
     /**
      * 获取至少有一个帖子的用户:has的用法
      */
@@ -106,6 +138,17 @@ class RelatedController extends Controller
         $users=User::has('posts')->get();
         return ($users->toArray());
     }
+	
+	/**
+     * 获取至少有一个帖子的用户:whereHas
+     */
+	function has2(){
+        $users=User::whereHas('posts',function($query){
+			$query->where('id','>',1);
+		})->get();
+        return ($users->toArray());
+    }
+	
 
     /**
      * 关联数据计数:统计每个用户的帖子
@@ -114,6 +157,10 @@ class RelatedController extends Controller
         $posts = User::withCount('posts')->get();
         return $posts->toArray();
     }
+	
+	
+	
+	
 
     /**
      * 懒加载：耗时
@@ -134,6 +181,9 @@ class RelatedController extends Controller
             dump ($user->address->city??"");
         }
     }
+	
+	
+	
 
     /**
      * 预加载：添加条件
@@ -155,20 +205,35 @@ class RelatedController extends Controller
             $query->where('tel', 'like', '133%');
         }])->get();
         foreach ($users as $user) {
-            dump ($user->address?$user->address->toArray():"");
+            dump ($user->toArray());
         }
     }
 
+	/**
+     * 预加载：多对多
+     */
+    function with4(){
+        $users = User::with('roles:id,name')->get();
+        dump($users->toArray());
+    }
 
     /**
-     * 延迟预加载 :load()
+     * 延迟预加载 :load() 设置更多的查询条件到渴求式加载查询上
      */
     function load(){
         $users = User::all();
         $users->load('address');
-        foreach ($users as $user) {
-            dump ($user->address?$user->address->toArray():"");
-        }
+		dd($users->toArray());
+ 
+    }
+	
+	/**
+     * 延迟预加载 :load() 多对多
+     */
+    function load2(){
+        $users = User::all()->load('roles');
+		dump($users->toArray());
+ 
     }
 
     /**
@@ -187,7 +252,7 @@ class RelatedController extends Controller
      */
     function sync1(){
         $user = User::find(3);
-        $data=[1,2];
+        $data=[3,4];
         $result = $user->roles()->sync($data);
         dump($result);
     }
@@ -235,7 +300,7 @@ class RelatedController extends Controller
 
 
     /**
-     *  多对多，中间表附加数据,可能会有重复的值要设置外键，最好用sync
+     *  多对多，中间表添加数据,可能会有重复的值要设置外键，最好用sync
      * @param int $userId
      * @param int $roleId
      * @param string $brand
